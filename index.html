@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机密 (Confidential) - 纯粹的本地密码管理工具</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #20C7B7 0%, #B230D1 100%);
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            background: var(--primary-gradient);
+            border-radius: 0 0 30px 30px;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            background: white;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            /* 如果你有图标文件，请替换下方的 src */
+            display: inline-block;
+        }
+
+        h1 { font-size: 2.5rem; margin: 10px 0; }
+        .tagline { font-size: 1.2rem; opacity: 0.9; }
+
+        section { margin-top: 60px; }
+        h2 { border-left: 4px solid #20C7B7; padding-left: 15px; margin-bottom: 30px; }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+
+        .feature-card h3 { color: #20C7B7; margin-top: 0; }
+
+        .faq-item {
+            background: var(--card-bg);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .faq-item h3 { font-size: 1.1rem; margin-top: 0; color: #eee; }
+        .faq-item p { color: var(--text-dim); margin-bottom: 0; }
+
+        .contact-box {
+            text-align: center;
+            background: var(--primary-gradient);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .email-link {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-bottom: 2px solid white;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-bottom: 40px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        a { color: #20C7B7; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="app-icon">
+          <img src="iconlogo.heic" alt="机密 App Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 22px;">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+                <rect width="100" height="100" rx="22" fill="white"/>
+                <path d="M50 25L30 45V75H70V45L50 25Z" fill="#B230D1"/>
+            </svg>
+        </div>
+        <h1>机密 (Confidential)</h1>
+        <p class="tagline">您的本地密码保险箱，安全从未如此简单</p>
+    </div>
+</header>
+
+<div class="container">
+    <!-- 营销部分 -->
+    <section id="features">
+        <h2>核心特性</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>AES-256 加密</h3>
+                <p>采用行业标准的军用级加密算法，确保您的数据在设备上坚不可摧。</p>
+            </div>
+            <div class="feature-card">
+                <h3>100% 离线存储</h3>
+                <p>不设服务器，不联网上传。您的密码只属于您，就在您的手机里。</p>
+            </div>
+            <div class="feature-card">
+                <h3>生物识别</h3>
+                <p>完美支持 Face ID 与 Touch ID，安全解锁仅需一瞬。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持部分 (FAQ) -->
+    <section id="support">
+        <h2>技术支持与常见问题</h2>
+        <div class="faq-item">
+            <h3>如果我忘记了主密码怎么办？</h3>
+            <p>由于“机密”采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。请务必牢记您的主密码。</p>
+        </div>
+        <div class="faq-item">
+            <h3>我的数据会同步到 iCloud 吗？</h3>
+            <p>当前版本仅支持本地存储，以确保最高级别的隐私隔离。未来版本可能会在确保加密安全的前提下提供可选的同步功能。</p>
+        </div>
+        <div class="faq-item">
+            <h3>如何备份我的数据？</h3>
+            <p>建议定期通过系统备份功能备份您的手机数据。由于数据是加密的，即使备份到云端，没有主密码也无法解密。</p>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="contact-box">
+        <h2>需要帮助？</h2>
+        <p>如果您遇到任何问题或有改进建议，请随时联系我们：</p>
+        <a href="mailto:gzyzz12325@163.com" class="email-link">yourname@example.com</a>
+    </section>
+
+    <!-- 隐私政策简述 -->
+    <section id="privacy">
+        <h2>隐私政策</h2>
+        <p>我们非常重视您的隐私。“机密” App 不会收集、存储或传输您的任何个人身份信息、账号数据或行为日志。所有数据均在您的设备本地处理。</p>
+        <p><a href="#">查看完整的隐私政策说明 &gt;</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 YourName. All Rights Reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
