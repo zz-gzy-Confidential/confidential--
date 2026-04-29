@@ -37,17 +37,28 @@
 
         .app-icon {
             width: 100px;
-    height: 100px;
-    border-radius: 22px;
-    background: white;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    display: inline-block;
-    overflow: hidden; /* 加上这一行，确保图片不会超出圆角边框 */
+            height: 100px;
+            border-radius: 22px;
+            background: white;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: inline-block;
+            overflow: hidden;
         }
 
         h1 { font-size: 2.5rem; margin: 10px 0; }
-        .tagline { font-size: 1.2rem; opacity: 0.9; }
+        .tagline { font-size: 1.2rem; opacity: 0.9; margin-bottom: 20px; }
+
+        /* 下载按钮样式 */
+        .download-container {
+            margin-top: 25px;
+        }
+        .app-store-btn {
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .app-store-btn:hover { transform: scale(1.05); }
+        .app-store-btn:active { transform: scale(0.95); }
 
         section { margin-top: 60px; }
         h2 { border-left: 4px solid #20C7B7; padding-left: 15px; margin-bottom: 30px; }
@@ -109,14 +120,22 @@
 <header>
     <div class="container">
         <div class="app-icon">
-            <!-- 这里已经改成了 .png，并删除了多余的 svg 图标 -->
-            <img src="iconlogo2.png" alt="机密 App Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 22px;">
+            <img src="iconlogo2.png" alt="机密 App Logo" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <h1>机密 (Confidential)</h1>
         <p class="tagline">您的本地密码保险箱，安全从未如此简单</p>
+        
+        <!-- 下载按钮 -->
+        <div class="download-container">
+            <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="app-store-btn">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/zh-cn?size=250x83" alt="在 App Store 下载" style="height: 48px;">
+            </a>
+        </div>
     </div>
+</header>
+
 <div class="container">
-    <!-- 营销部分 -->
+    <!-- 核心特性 -->
     <section id="features">
         <h2>核心特性</h2>
         <div class="features">
@@ -135,7 +154,7 @@
         </div>
     </section>
 
-    <!-- 支持部分 (FAQ) -->
+    <!-- 技术支持 -->
     <section id="support">
         <h2>技术支持与常见问题</h2>
         <div class="faq-item">
@@ -159,18 +178,22 @@
         <a href="mailto:gzyzz12325@163.com" class="email-link">gzyzz12325@163.com</a>
     </section>
 
-    <!-- 隐私政策简述 -->
-<section id="privacy" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
-    <h2>隐私政策与安全声明</h2>
-    <p><strong>1. 数据不收集原则：</strong>“机密” App 坚决保护用户隐私。我们不设立服务器，不会收集、上传或存储您的任何密码、账号、姓名或联系方式。</p>
-    <p><strong>2. 本地加密：</strong>您的所有数据均通过 AES-256-GCM 算法加密后存储在 iOS 系统的私有沙盒中。除了拥有主密码的您，任何人（包括开发者）都无法访问。</p>
-    <p><strong>3. 第三方插件：</strong>本应用不集成任何第三方统计、广告或追踪插件，确保您的行为轨迹不被泄露。</p>
-    <p><strong>4. 责任限制：</strong>由于加密的私密性，若主密码丢失导致数据无法解密，本应用无法提供找回服务。</p>
-</section>
+    <!-- 隐私政策 -->
+    <section id="privacy" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
+        <h2>隐私政策与安全声明</h2>
+        <p><strong>1. 数据不收集原则：</strong>“机密” App 坚决保护用户隐私。我们不设立服务器，不会收集、上传或存储您的任何密码、账号、姓名或联系方式。</p>
+        <p><strong>2. 本地加密：</strong>您的所有数据均通过 AES-256-GCM 算法加密后存储在 iOS 系统的私有沙盒中。除了拥有主密码的您，任何人（包括开发者）都无法访问。</p>
+        <p><strong>3. 第三方插件：</strong>本应用不集成任何第三方统计、广告或追踪插件，确保您的行为轨迹不被泄露。</p>
+        <p><strong>4. 责任限制：</strong>由于加密的私密性，若主密码丢失导致数据无法解密，本应用无法提供找回服务。</p>
+    </section>
+
     <footer>
         <p>&copy; 2026 guanziyi. All Rights Reserved.</p>
     </footer>
 </div>
+
+</body>
+</html>
 
 </body>
 </html>
