@@ -11,6 +11,7 @@
             --card-bg: #1e1e1e;
             --text-main: #ffffff;
             --text-dim: #b0b0b0;
+            --apple-blue: #0071e3;
         }
 
         body {
@@ -113,6 +114,63 @@
         }
 
         a { color: #20C7B7; text-decoration: none; }
+
+        /* --- 苹果风格区域内吸附按钮 CSS --- */
+        
+        /* 1. 必须给父容器设置 position: relative 且不能有 overflow: hidden */
+        #support {
+            position: relative;
+            padding-bottom: 20px; /* 给按钮留出停靠空间 */
+        }
+
+        /* 2. 粘性定位核心 */
+        .apple-sticky-btn {
+            position: -webkit-sticky; /* 兼容 Safari */
+            position: sticky;
+            bottom: 30px; /* 滚动时距离屏幕底部的距离 */
+            
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: fit-content;
+            min-width: 280px;
+            margin: 40px auto 0; /* 初始位置在区域底部 */
+            padding: 8px 8px 8px 24px;
+            
+            background: rgba(45, 45, 45, 0.7); /* 深色毛玻璃 */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            z-index: 100;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .apple-sticky-btn:hover {
+            background: rgba(60, 60, 60, 0.9);
+            transform: scale(1.02);
+        }
+
+        .apple-sticky-btn .arrow-circle {
+            width: 36px;
+            height: 36px;
+            background: var(--apple-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
@@ -154,7 +212,7 @@
         </div>
     </section>
 
-    <!-- 技术支持 -->
+    <!-- 技术支持区域 -->
     <section id="support">
         <h2>技术支持与常见问题</h2>
         <div class="faq-item">
@@ -169,6 +227,12 @@
             <h3>如何备份我的数据？</h3>
             <p>建议定期通过系统备份功能备份您的手机数据。由于数据是加密的，即使备份到云端，没有主密码也无法解密。</p>
         </div>
+
+        <!-- 苹果风格吸附按钮：放在区域内部的最后 -->
+        <a href="mailto:gzyzz12325@163.com" class="apple-sticky-btn">
+            <span>联系技术支持</span>
+            <div class="arrow-circle">›</div>
+        </a>
     </section>
 
     <!-- 联系方式 -->
@@ -191,9 +255,6 @@
         <p>&copy; 2026 guanziyi. All Rights Reserved.</p>
     </footer>
 </div>
-
-</body>
-</html>
 
 </body>
 </html>
