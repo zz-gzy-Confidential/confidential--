@@ -14,9 +14,7 @@
             --apple-blue: #0071e3;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         html, body {
             margin: 0;
@@ -25,11 +23,7 @@
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-        }
-
-        /* 注意：祖先元素不要有 overflow:hidden/auto/scroll，否则 sticky 可能失效 */
-        body {
-            overflow-x: hidden;
+            /* 关键：祖先绝对不能有 overflow hidden/auto/scroll */
         }
 
         .container {
@@ -38,9 +32,10 @@
             padding: 0 20px;
         }
 
+        /* ── Header（纯展示，不含按钮） ── */
         header {
             text-align: center;
-            padding: 60px 0 80px;
+            padding: 60px 0 50px;
             background: var(--primary-gradient);
             border-radius: 0 0 30px 30px;
         }
@@ -62,64 +57,15 @@
             display: block;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin: 10px 0;
-        }
+        h1 { font-size: 2.5rem; margin: 10px 0; }
 
         .tagline {
             font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 24px;
-        }
-
-        section {
-            margin-top: 72px;
-        }
-
-        h2 {
-            border-left: 4px solid #20C7B7;
-            padding-left: 15px;
-            margin-bottom: 30px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-card,
-        .faq-item,
-        .help-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #333;
-        }
-
-        .feature-card h3 {
-            color: #20C7B7;
-            margin-top: 0;
-        }
-
-        .faq-item {
-            margin-bottom: 16px;
-        }
-
-        .faq-item h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .faq-item p,
-        .help-card p {
-            color: var(--text-dim);
             margin-bottom: 0;
         }
 
-        /* 通用按钮样式 */
+        /* ── 通用 pill 按钮 ── */
         .pill-btn {
             display: inline-flex;
             align-items: center;
@@ -162,34 +108,68 @@
             fill: white;
         }
 
-        /* 1. 下载按钮：放在 header 内部，sticky top */
+        /*
+         * ── 下载按钮 sticky 容器 ──
+         * 关键：它是 body 的直接子级，紧跟在 header 后面
+         * sticky top:0 → 滚动到顶部时吸附，未到顶时随文档流停在 header 下方
+         */
         .download-sticky-wrap {
             position: sticky;
             top: 16px;
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding-top: 8px;
+            /* 负 margin 让按钮视觉上"浮"在 header 底边 */
+            margin-top: -28px;
+            margin-bottom: 28px;
+            pointer-events: none; /* 让背后内容可点击 */
         }
 
-        /* 2. 支持区域 */
-        .support-section {
-            position: relative;
-            padding-bottom: 140px; /* 给 sticky 按钮留空间，避免遮住下面内容 */
+        .download-sticky-wrap .pill-btn {
+            pointer-events: auto;
         }
 
+        /* ── 正文区域 ── */
+        section {
+            margin-top: 72px;
+        }
+
+        h2 {
+            border-left: 4px solid #20C7B7;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card,
+        .faq-item,
         .help-card {
-            margin-top: 24px;
-            text-align: center;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
         }
 
-        .help-card h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            color: #fff;
-        }
+        .feature-card h3 { color: #20C7B7; margin-top: 0; }
 
-        /* 联系支持按钮：必须放在 support-section 最后 */
+        .faq-item { margin-bottom: 16px; }
+        .faq-item h3 { margin-top: 0; margin-bottom: 12px; color: #fff; }
+        .faq-item p, .help-card p { color: var(--text-dim); margin-bottom: 0; }
+
+        .help-card { margin-top: 24px; text-align: center; }
+        .help-card h3 { margin-top: 0; margin-bottom: 12px; color: #fff; }
+
+        /*
+         * ── 联系支持按钮 sticky 容器 ──
+         * 同样是 body 直接子级（在 .container 外面）
+         * sticky bottom:20px → 滚动到 support 区域时吸附底部
+         * 原始位置在 support section 末尾，滚过去后自然停住
+         */
         .support-sticky-wrap {
             position: sticky;
             bottom: 20px;
@@ -197,25 +177,24 @@
             display: flex;
             justify-content: center;
             margin-top: 30px;
+            margin-bottom: 60px;
+            pointer-events: none;
+        }
+
+        .support-sticky-wrap .pill-btn {
+            pointer-events: auto;
         }
 
         footer {
             text-align: center;
-            margin-top: 80px;
             padding: 0 0 40px;
             color: var(--text-dim);
             font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .tagline {
-                font-size: 1rem;
-            }
-
+            h1 { font-size: 2rem; }
+            .tagline { font-size: 1rem; }
             .pill-btn {
                 min-width: unset;
                 width: min(100%, 340px);
@@ -226,30 +205,37 @@
 </head>
 <body>
 
+    <!-- 1. Header：只放品牌信息，不放按钮 -->
     <header>
         <div class="container">
             <div class="app-icon">
                 <img src="iconlogo2.png" alt="机密 App Logo">
             </div>
-
             <h1>机密 (Confidential)</h1>
             <p class="tagline">您的本地密码保险箱，安全从未如此简单</p>
-
-            <!-- 下载按钮：原位在 header，滚动后吸附顶部 -->
-            <div class="download-sticky-wrap">
-                <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="pill-btn">
-                    <span>立即在 App Store 下载</span>
-                    <span class="icon-circle">
-                        <svg class="btn-icon" viewBox="0 0 384 512" aria-hidden="true">
-                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                        </svg>
-                    </span>
-                </a>
-            </div>
         </div>
     </header>
 
+    <!--
+        2. 下载按钮 sticky 容器
+        必须是 body 直接子级，紧跟 header
+        top:16px → 页面向下滚动时，按钮吸附在距顶部 16px 处
+        当页面回滚到顶部，按钮回到 header 下方的原始位置
+    -->
+    <div class="download-sticky-wrap">
+        <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="pill-btn">
+            <span>立即在 App Store 下载</span>
+            <span class="icon-circle">
+                <svg class="btn-icon" viewBox="0 0 384 512" aria-hidden="true">
+                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+    <!-- 3. 主内容 -->
     <div class="container">
+
         <section id="features">
             <h2>核心特性</h2>
             <div class="features">
@@ -268,13 +254,12 @@
             </div>
         </section>
 
-        <!-- 支持区域：按钮必须在这个区域最底部 -->
-        <section id="support" class="support-section">
+        <section id="support">
             <h2>技术支持与常见问题</h2>
 
             <div class="faq-item">
                 <h3>如果我忘记了主密码怎么办？</h3>
-                <p>由于“机密”采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。请务必牢记您的主密码。</p>
+                <p>由于"机密"采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。请务必牢记您的主密码。</p>
             </div>
 
             <div class="faq-item">
@@ -291,23 +276,31 @@
                 <h3>需要帮助？</h3>
                 <p>如果您遇到任何问题或有改进建议，请随时联系我们。</p>
             </div>
-
-            <!-- 联系支持按钮：在 support-section 底部，sticky bottom -->
-            <div class="support-sticky-wrap">
-                <a href="mailto:gzyzz12325@163.com" class="pill-btn">
-                    <span>联系技术支持</span>
-                    <span class="icon-circle">
-                        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </span>
-                </a>
-            </div>
         </section>
 
+    </div>
+
+    <!--
+        4. 联系支持按钮 sticky 容器
+        必须是 body 直接子级，紧跟 support section 所在的 .container
+        bottom:20px → 在 support 区域内滚动时吸附底部
+        滚过 support 区域后，按钮随文档流停在原始位置
+    -->
+    <div class="support-sticky-wrap">
+        <a href="mailto:gzyzz12325@163.com" class="pill-btn">
+            <span>联系技术支持</span>
+            <span class="icon-circle">
+                <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+    <div class="container">
         <section id="privacy" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
             <h2>隐私政策与安全声明</h2>
-            <p><strong>1. 数据不收集原则：</strong>“机密” App 坚决保护用户隐私。我们不设立服务器，不会收集、上传或存储您的任何密码、账号、姓名或联系方式。</p>
+            <p><strong>1. 数据不收集原则：</strong>"机密" App 坚决保护用户隐私。我们不设立服务器，不会收集、上传或存储您的任何密码、账号、姓名或联系方式。</p>
             <p><strong>2. 本地加密：</strong>您的所有数据均通过 AES-256-GCM 算法加密后存储在 iOS 系统的私有沙盒中。除了拥有主密码的您，任何人（包括开发者）都无法访问。</p>
         </section>
 
