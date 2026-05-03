@@ -66,30 +66,31 @@
         }
 
         /* ── 通用 pill 按钮 ── */
-        .pill-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            min-width: 290px;
-            padding: 8px 8px 8px 22px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            color: #fff;
-            background: rgba(20,20,20,0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.14);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-        }
+       .pill-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 290px;
+    padding: 8px 8px 8px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #1d1d1f;                          /* 深色文字，匹配 Apple 风格 */
+    background: rgba(235, 235, 237, 0.92);   /* 浅灰色背景 */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.06);   /* 极淡的边框 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
 
-        .pill-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 14px 36px rgba(0,0,0,0.42);
-            background: rgba(20,20,20,0.9);
-        }
+.pill-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    background: rgba(220, 220, 222, 0.96);   /* hover 时略深一点 */
+}
+
 
         .icon-circle {
             width: 40px;
