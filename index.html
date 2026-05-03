@@ -14,6 +14,14 @@
             --apple-blue: #0071e3;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--dark-bg);
@@ -34,6 +42,7 @@
             padding: 60px 0;
             background: var(--primary-gradient);
             border-radius: 0 0 30px 30px;
+            position: relative;
         }
 
         .app-icon {
@@ -47,18 +56,26 @@
             overflow: hidden;
         }
 
-        h1 { font-size: 2.5rem; margin: 10px 0; }
-        .tagline { font-size: 1.2rem; opacity: 0.9; margin-bottom: 20px; }
-
-        .download-container { margin-top: 25px; }
-        .app-store-btn {
-            display: inline-block;
-            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        h1 {
+            font-size: 2.5rem;
+            margin: 10px 0;
         }
-        .app-store-btn:hover { transform: scale(1.05); }
 
-        section { margin-top: 60px; }
-        h2 { border-left: 4px solid #20C7B7; padding-left: 15px; margin-bottom: 30px; }
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-top: 60px;
+        }
+
+        h2 {
+            border-left: 4px solid #20C7B7;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
 
         .features {
             display: grid;
@@ -73,7 +90,10 @@
             border: 1px solid #333;
         }
 
-        .feature-card h3 { color: #20C7B7; margin-top: 0; }
+        .feature-card h3 {
+            color: #20C7B7;
+            margin-top: 0;
+        }
 
         .faq-item {
             background: var(--card-bg);
@@ -82,84 +102,179 @@
             border-radius: 10px;
         }
 
-        .faq-item h3 { font-size: 1.1rem; margin-top: 0; color: #eee; }
-        .faq-item p { color: var(--text-dim); margin-bottom: 0; }
-
-        /* --- 粘性区域容器 --- */
-        .sticky-zone {
-            position: relative;
-            margin-top: 40px;
+        .faq-item h3 {
+            font-size: 1.1rem;
+            margin-top: 0;
+            color: #eee;
         }
 
-        .contact-box {
-            text-align: center;
-            background: var(--primary-gradient);
-            padding: 60px 24px 100px; 
-            border-radius: 20px;
-            margin-top: 40px;
+        .faq-item p {
+            color: var(--text-dim);
+            margin-bottom: 0;
         }
 
-        .contact-box h2 { border-left: none; padding-left: 0; color: white; }
+        a {
+            color: #20C7B7;
+            text-decoration: none;
+        }
 
-        /* --- 苹果风格吸附按钮通用样式 --- */
-        .apple-sticky-btn {
-            position: -webkit-sticky;
-            position: sticky;
-            bottom: 30px; 
+        /* 顶部区域原始下载按钮 */
+        .download-container {
+            margin-top: 25px;
+        }
+
+        .hero-download-btn {
             display: inline-flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            min-width: 300px;
-            margin: 40px auto 0;
-            padding: 8px 8px 8px 24px;
+            gap: 16px;
+            min-width: 280px;
+            padding: 8px 8px 8px 22px;
             border-radius: 999px;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            color: #fff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 17px;
-            z-index: 100;
-            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
 
-        /* 下载按钮样式 (亮色) */
-        .download-sticky {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .hero-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.86);
+        }
+
+        /* 顶部悬浮下载按钮 */
+        .top-floating-download {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-16px);
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            min-width: 280px;
+            max-width: calc(100% - 24px);
+            padding: 8px 8px 8px 20px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             color: #1d1d1f;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+            border: 1px solid rgba(255,255,255,0.35);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease;
         }
 
-        /* 支持按钮样式 (深色) */
-        .support-sticky {
-            background: rgba(30, 30, 30, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        .top-floating-download.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
         }
 
-        .apple-sticky-btn:hover {
-            transform: scale(1.02);
+        .top-floating-download:hover {
+            box-shadow: 0 14px 36px rgba(0,0,0,0.2);
         }
 
+        /* 通用圆形图标 */
         .icon-circle {
             width: 40px;
             height: 40px;
-            background: var(--apple-blue);
             border-radius: 50%;
-            display: flex;
+            background: var(--apple-blue);
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+        }
+
+        .dark-icon-circle {
+            background: rgba(255,255,255,0.16);
         }
 
         .btn-icon {
             width: 20px;
             height: 20px;
             fill: white;
+        }
+
+        .top-floating-download .icon-circle {
+            width: 36px;
+            height: 36px;
+        }
+
+        .top-floating-download .btn-icon {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        /* 支持区域 */
+        .sticky-zone {
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .contact-box {
+            text-align: center;
+            background: var(--primary-gradient);
+            padding: 60px 24px 110px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .contact-box h2 {
+            border-left: none;
+            padding-left: 0;
+            color: white;
+        }
+
+        .contact-box p {
+            color: rgba(255,255,255,0.92);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        /* 帮助区域底部悬浮按钮 */
+        .support-sticky-btn {
+            position: sticky;
+            bottom: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            min-width: 300px;
+            margin: 40px auto 0;
+            padding: 8px 8px 8px 24px;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            color: white;
+            font-weight: 600;
+            font-size: 17px;
+            text-decoration: none;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            z-index: 100;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .support-sticky-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 44px rgba(0,0,0,0.42);
+            background: rgba(30, 30, 30, 0.72);
         }
 
         footer {
@@ -171,35 +286,69 @@
         }
 
         @media (max-width: 768px) {
-            .apple-sticky-btn {
-                min-width: 260px;
-                font-size: 15px;
+            .container {
+                padding: 32px 16px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .hero-download-btn,
+            .top-floating-download,
+            .support-sticky-btn {
+                min-width: unset;
+                width: min(100%, 340px);
+                font-size: 0.96rem;
+            }
+
+            .contact-box {
+                padding: 44px 18px 104px;
             }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="app-icon">
-            <img src="iconlogo2.png" alt="机密 App Logo" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <h1>机密 (Confidential)</h1>
-        <p class="tagline">您的本地密码保险箱，安全从未如此简单</p>
-        
-        <div class="download-container">
-            <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="app-store-btn">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/zh-cn?size=250x83" alt="在 App Store 下载" style="height: 48px;">
-            </a>
-        </div>
-    </div>
-</header>
+    <!-- 顶部悬浮下载按钮 -->
+    <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="top-floating-download" id="topFloatingDownload">
+        <span>立即在 App Store 下载</span>
+        <span class="icon-circle">
+            <svg class="btn-icon" viewBox="0 0 384 512" aria-hidden="true">
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+        </span>
+    </a>
 
-<div class="container">
-    
-    <!-- 区域一：下载粘性区域 (包含特性介绍) -->
-    <div class="sticky-zone" id="download-zone">
+    <header>
+        <div class="container">
+            <div class="app-icon">
+                <img src="iconlogo2.png" alt="机密 App Logo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            <h1>机密 (Confidential)</h1>
+            <p class="tagline">您的本地密码保险箱，安全从未如此简单</p>
+
+            <!-- 原始位置下载按钮 -->
+            <div class="download-container" id="heroDownloadArea">
+                <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="hero-download-btn">
+                    <span>立即在 App Store 下载</span>
+                    <span class="icon-circle dark-icon-circle">
+                        <svg class="btn-icon" viewBox="0 0 384 512" aria-hidden="true">
+                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 核心特性 -->
         <section id="features">
             <h2>核心特性</h2>
             <div class="features">
@@ -218,60 +367,72 @@
             </div>
         </section>
 
-        <!-- 悬浮下载按钮 -->
-        <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="apple-sticky-btn download-sticky">
-            <span>立即在 App Store 下载</span>
-            <div class="icon-circle">
-                <!-- Apple Logo SVG -->
-                <svg class="btn-icon" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                </svg>
-            </div>
-        </a>
-    </div>
-
-    <!-- 区域二：支持粘性区域 (包含 FAQ 和 联系框) -->
-    <div class="sticky-zone" id="support-zone">
-        <section id="support">
-            <h2>技术支持与常见问题</h2>
-            <div class="faq-item">
-                <h3>如果我忘记了主密码怎么办？</h3>
-                <p>由于“机密”采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。</p>
-            </div>
-            <div class="faq-item">
-                <h3>我的数据会同步到 iCloud 吗？</h3>
-                <p>当前版本仅支持本地存储，以确保最高级别的隐私隔离。</p>
-            </div>
-        </section>
-
-        <section class="contact-box">
-            <h2>需要帮助？</h2>
-            <p>如果您遇到任何问题或有改进建议，请随时联系我们：</p>
-            
-            <!-- 悬浮支持按钮 -->
-            <a href="mailto:gzyzz12325@163.com" class="apple-sticky-btn support-sticky">
-                <span>联系技术支持</span>
-                <div class="icon-circle">
-                    <!-- Mail SVG -->
-                    <svg class="btn-icon" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
+        <!-- 支持区域 -->
+        <div class="sticky-zone">
+            <section id="support">
+                <h2>技术支持与常见问题</h2>
+                <div class="faq-item">
+                    <h3>如果我忘记了主密码怎么办？</h3>
+                    <p>由于“机密”采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。请务必牢记您的主密码。</p>
                 </div>
-            </a>
+                <div class="faq-item">
+                    <h3>我的数据会同步到 iCloud 吗？</h3>
+                    <p>当前版本仅支持本地存储，以确保最高级别的隐私隔离。未来版本可能会在确保加密安全的前提下提供可选的同步功能。</p>
+                </div>
+                <div class="faq-item">
+                    <h3>如何备份我的数据？</h3>
+                    <p>建议定期通过系统备份功能备份您的手机数据。由于数据是加密的，即使备份到云端，没有主密码也无法解密。</p>
+                </div>
+            </section>
+
+            <section class="contact-box">
+                <h2>需要帮助？</h2>
+                <p>如果您遇到任何问题或有改进建议，请随时联系我们：</p>
+
+                <a href="mailto:gzyzz12325@163.com" class="support-sticky-btn">
+                    <span>联系技术支持</span>
+                    <span class="icon-circle">
+                        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </span>
+                </a>
+            </section>
+        </div>
+
+        <!-- 隐私政策 -->
+        <section id="privacy" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
+            <h2>隐私政策与安全声明</h2>
+            <p><strong>1. 数据不收集原则：</strong>“机密” App 坚决保护用户隐私。我们不设立服务器，不会收集、上传或存储您的任何密码、账号、姓名或联系方式。</p>
+            <p><strong>2. 本地加密：</strong>您的所有数据均通过 AES-256-GCM 算法加密后存储在 iOS 系统的私有沙盒中。除了拥有主密码的您，任何人（包括开发者）都无法访问。</p>
+            <p><strong>3. 第三方插件：</strong>本应用不集成任何第三方统计、广告或追踪插件，确保您的行为轨迹不被泄露。</p>
+            <p><strong>4. 责任限制：</strong>由于加密的私密性，若主密码丢失导致数据无法解密，本应用无法提供找回服务。</p>
         </section>
+
+        <footer>
+            <p>&copy; 2026 guanziyi. All Rights Reserved.</p>
+        </footer>
     </div>
 
-    <!-- 隐私政策 -->
-    <section id="privacy" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
-        <h2>隐私政策与安全声明</h2>
-        <p><strong>1. 数据不收集原则：</strong>“机密” App 坚决保护用户隐私。我们不设立服务器，不会收集您的任何数据。</p>
-        <p><strong>2. 本地加密：</strong>您的所有数据均通过 AES-256-GCM 算法加密后存储在 iOS 系统的私有沙盒中。</p>
-    </section>
+    <script>
+        const heroDownloadArea = document.getElementById('heroDownloadArea');
+        const topFloatingDownload = document.getElementById('topFloatingDownload');
 
-    <footer>
-        <p>&copy; 2026 guanziyi. All Rights Reserved.</p>
-    </footer>
-</div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    topFloatingDownload.classList.remove('show');
+                } else {
+                    topFloatingDownload.classList.add('show');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0
+        });
+
+        observer.observe(heroDownloadArea);
+    </script>
 
 </body>
 </html>
