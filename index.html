@@ -77,6 +77,11 @@
             margin-bottom: 30px;
         }
 
+        a {
+            color: #20C7B7;
+            text-decoration: none;
+        }
+
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -113,12 +118,7 @@
             margin-bottom: 0;
         }
 
-        a {
-            color: #20C7B7;
-            text-decoration: none;
-        }
-
-        /* 顶部区域原始下载按钮 */
+        /* 顶部原始下载按钮 */
         .download-container {
             margin-top: 25px;
         }
@@ -183,11 +183,7 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        .top-floating-download:hover {
-            box-shadow: 0 14px 36px rgba(0,0,0,0.2);
-        }
-
-        /* 通用圆形图标 */
+        /* 通用图标 */
         .icon-circle {
             width: 40px;
             height: 40px;
@@ -217,47 +213,49 @@
         .top-floating-download .btn-icon {
             width: 18px;
             height: 18px;
-            fill: white;
         }
 
-        /* 支持区域 */
-        .sticky-zone {
-            position: relative;
+        /* 合并后的支持区域 */
+        .support-section {
             margin-top: 60px;
         }
 
-        .contact-box {
+        .support-help-block {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 18px;
+            padding: 28px 22px;
+            margin-top: 24px;
             text-align: center;
-            background: var(--primary-gradient);
-            padding: 60px 24px 110px;
-            border-radius: 20px;
-            margin-top: 40px;
         }
 
-        .contact-box h2 {
-            border-left: none;
-            padding-left: 0;
-            color: white;
+        .support-help-block h3 {
+            margin: 0 0 12px;
+            font-size: 1.5rem;
+            color: #fff;
         }
 
-        .contact-box p {
-            color: rgba(255,255,255,0.92);
-            margin-bottom: 24px;
-            font-size: 1.05rem;
+        .support-help-block p {
+            margin: 0;
+            color: var(--text-dim);
+            font-size: 1rem;
         }
 
-        /* 帮助区域底部悬浮按钮 */
-        .support-sticky-btn {
-            position: sticky;
-            bottom: 30px;
+        .support-button-anchor {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 原始位置按钮 */
+        .support-inline-btn {
             display: inline-flex;
             align-items: center;
             justify-content: space-between;
             gap: 18px;
             min-width: 300px;
-            margin: 40px auto 0;
             padding: 8px 8px 8px 24px;
-            background: rgba(30, 30, 30, 0.6);
+            background: rgba(30, 30, 30, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.16);
@@ -267,14 +265,52 @@
             font-size: 17px;
             text-decoration: none;
             box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-            z-index: 100;
             transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
 
-        .support-sticky-btn:hover {
+        .support-inline-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 16px 44px rgba(0,0,0,0.42);
-            background: rgba(30, 30, 30, 0.72);
+            background: rgba(30, 30, 30, 0.92);
+        }
+
+        /* 底部悬浮联系按钮 */
+        .floating-support-btn {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%) translateY(18px);
+            z-index: 9998;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            min-width: 300px;
+            max-width: calc(100% - 24px);
+            padding: 8px 8px 8px 24px;
+            background: rgba(30, 30, 30, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            color: white;
+            font-weight: 600;
+            font-size: 17px;
+            text-decoration: none;
+            box-shadow: 0 14px 40px rgba(0,0,0,0.38);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease;
+        }
+
+        .floating-support-btn.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .floating-support-btn:hover {
+            box-shadow: 0 18px 48px rgba(0,0,0,0.45);
         }
 
         footer {
@@ -300,14 +336,20 @@
 
             .hero-download-btn,
             .top-floating-download,
-            .support-sticky-btn {
+            .support-inline-btn,
+            .floating-support-btn {
                 min-width: unset;
                 width: min(100%, 340px);
                 font-size: 0.96rem;
             }
 
-            .contact-box {
-                padding: 44px 18px 104px;
+            .support-help-block h3 {
+                font-size: 1.3rem;
+            }
+
+            .icon-circle {
+                width: 38px;
+                height: 38px;
             }
         }
     </style>
@@ -324,6 +366,16 @@
         </span>
     </a>
 
+    <!-- 底部悬浮联系支持按钮 -->
+    <a href="mailto:gzyzz12325@163.com" class="floating-support-btn" id="floatingSupportBtn">
+        <span>联系技术支持</span>
+        <span class="icon-circle">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 3.2-8 5.6-8-5.6V6l8 5.6L20 6v1.2z"/>
+            </svg>
+        </span>
+    </a>
+
     <header>
         <div class="container">
             <div class="app-icon">
@@ -333,7 +385,6 @@
             <h1>机密 (Confidential)</h1>
             <p class="tagline">您的本地密码保险箱，安全从未如此简单</p>
 
-            <!-- 原始位置下载按钮 -->
             <div class="download-container" id="heroDownloadArea">
                 <a href="https://apps.apple.com/app/id6763994948" target="_blank" class="hero-download-btn">
                     <span>立即在 App Store 下载</span>
@@ -367,38 +418,42 @@
             </div>
         </section>
 
-        <!-- 支持区域 -->
-        <div class="sticky-zone">
-            <section id="support">
-                <h2>技术支持与常见问题</h2>
-                <div class="faq-item">
-                    <h3>如果我忘记了主密码怎么办？</h3>
-                    <p>由于“机密”采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。请务必牢记您的主密码。</p>
-                </div>
-                <div class="faq-item">
-                    <h3>我的数据会同步到 iCloud 吗？</h3>
-                    <p>当前版本仅支持本地存储，以确保最高级别的隐私隔离。未来版本可能会在确保加密安全的前提下提供可选的同步功能。</p>
-                </div>
-                <div class="faq-item">
-                    <h3>如何备份我的数据？</h3>
-                    <p>建议定期通过系统备份功能备份您的手机数据。由于数据是加密的，即使备份到云端，没有主密码也无法解密。</p>
-                </div>
-            </section>
+        <!-- 合并后的技术支持 + 需要帮助 -->
+        <section id="supportSection" class="support-section">
+            <h2>技术支持与常见问题</h2>
 
-            <section class="contact-box">
-                <h2>需要帮助？</h2>
-                <p>如果您遇到任何问题或有改进建议，请随时联系我们：</p>
+            <div class="faq-item">
+                <h3>如果我忘记了主密码怎么办？</h3>
+                <p>由于“机密”采用完全本地加密且不存储您的主密码，如果您忘记了它，我们将无法为您恢复数据。请务必牢记您的主密码。</p>
+            </div>
 
-                <a href="mailto:gzyzz12325@163.com" class="support-sticky-btn">
-                    <span>联系技术支持</span>
-                    <span class="icon-circle">
-                        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </span>
-                </a>
-            </section>
-        </div>
+            <div class="faq-item">
+                <h3>我的数据会同步到 iCloud 吗？</h3>
+                <p>当前版本仅支持本地存储，以确保最高级别的隐私隔离。未来版本可能会在确保加密安全的前提下提供可选的同步功能。</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>如何备份我的数据？</h3>
+                <p>建议定期通过系统备份功能备份您的手机数据。由于数据是加密的，即使备份到云端，没有主密码也无法解密。</p>
+            </div>
+
+            <div class="support-help-block">
+                <h3>需要帮助？</h3>
+                <p>如果您遇到任何问题或有改进建议，请随时联系我们。</p>
+
+                <!-- 原始位置按钮 -->
+                <div class="support-button-anchor" id="supportButtonAnchor">
+                    <a href="mailto:gzyzz12325@163.com" class="support-inline-btn">
+                        <span>联系技术支持</span>
+                        <span class="icon-circle">
+                            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20 4H4c-.1 0-.2 0-.3 0C2.8 4.1 2 5 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1-.8-1.9-1.7-2-.1 0-.2 0-.3 0zm0 2-8 5.6L4 6h16z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <!-- 隐私政策 -->
         <section id="privacy" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
@@ -415,10 +470,11 @@
     </div>
 
     <script>
+        /* 顶部下载按钮：滚出顶部区域后悬浮到顶部 */
         const heroDownloadArea = document.getElementById('heroDownloadArea');
         const topFloatingDownload = document.getElementById('topFloatingDownload');
 
-        const observer = new IntersectionObserver((entries) => {
+        const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     topFloatingDownload.classList.remove('show');
@@ -427,11 +483,52 @@
                 }
             });
         }, {
-            root: null,
             threshold: 0
         });
 
-        observer.observe(heroDownloadArea);
+        heroObserver.observe(heroDownloadArea);
+
+        /* 底部联系按钮逻辑
+           条件：
+           1. 支持区域在视口中
+           2. 原始按钮位置不在视口中
+           满足时，显示底部悬浮按钮
+        */
+        const supportSection = document.getElementById('supportSection');
+        const supportButtonAnchor = document.getElementById('supportButtonAnchor');
+        const floatingSupportBtn = document.getElementById('floatingSupportBtn');
+
+        let supportSectionInView = false;
+        let supportAnchorInView = false;
+
+        function updateSupportFloating() {
+            if (supportSectionInView && !supportAnchorInView) {
+                floatingSupportBtn.classList.add('show');
+            } else {
+                floatingSupportBtn.classList.remove('show');
+            }
+        }
+
+        const supportSectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                supportSectionInView = entry.isIntersecting;
+                updateSupportFloating();
+            });
+        }, {
+            threshold: 0.05
+        });
+
+        const supportAnchorObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                supportAnchorInView = entry.isIntersecting;
+                updateSupportFloating();
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        supportSectionObserver.observe(supportSection);
+        supportAnchorObserver.observe(supportButtonAnchor);
     </script>
 
 </body>
